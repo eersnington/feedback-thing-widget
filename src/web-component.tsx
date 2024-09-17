@@ -21,13 +21,7 @@ class WidgetWebComponent extends HTMLElement {
     }
   }
 
-  disconnectedCallback() {
-    if (this.root) {
-      this.root.unmount();
-    }
-  }
-
-  private getPropsFromAttributes(): Record<string, string> {
+  getPropsFromAttributes(): Record<string, string> {
     const props: Record<string, string> = {};
     for (const { name, value } of this.attributes) {
       props[normalizeAttribute(name)] = value;
@@ -37,6 +31,3 @@ class WidgetWebComponent extends HTMLElement {
 }
 
 export default WidgetWebComponent;
-
-// Register the Web Component
-customElements.define("feedback-widget", WidgetWebComponent);
