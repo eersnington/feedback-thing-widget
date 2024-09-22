@@ -10,6 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Camera, Star, Loader } from "lucide-react";
+import { useFeedback } from "./FeedbackContext";
 
 interface FeedbackFormProps {
   projectId: string;
@@ -33,11 +34,13 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
   handleScreenshot,
   screenshot,
 }) => {
-  const [feedbackType, setFeedbackType] = useState("");
+  const { feedbackType, setFeedbackType } = useFeedback();
   const [rating, setRating] = useState(0);
   const [feedback, setFeedback] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  console.log("Current feedback type:", feedbackType);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -106,7 +109,10 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
         </Label>
         <Select
           value={feedbackType}
-          onValueChange={(value) => setFeedbackType(value)}
+          onValueChange={(value) => {
+            console.log("Select onValueChange called with:", value);
+            setFeedbackType(value);
+          }}
         >
           <SelectTrigger
             id="feedbackType"
