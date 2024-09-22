@@ -95,7 +95,7 @@ const FeedbackWidget: React.FC<FeedbackWidgetProps> = ({ projectId }) => {
       }
 
       const response = await fetch(
-        "https://sreenington-nextjs-test.loca.lt/api/submit-feedback",
+        "https://feedback-thing.vercel.app/api/submit-feedback",
         {
           method: "POST",
           body: formData,
